@@ -5,7 +5,6 @@
   "framework": "nextjs",
   "env": {
     "GEMINI_API_KEY": "AIzaSyA1ZZChadARut17eYel7BxfYCkpGU7hv4A",
-    "POSTGRES_URL": "@postgres_url"
   },
   "builds": [
     {
