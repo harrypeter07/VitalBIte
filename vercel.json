@@ -1,15 +1,1 @@
-{
-  "version": 2,
-  "buildCommand": "next build",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "env": {
-    "GEMINI_API_KEY": "AIzaSyA1ZZChadARut17eYel7BxfYCkpGU7hv4A",
-  },
-  "builds": [
-    {
-      "src": "next.config.js",
-      "use": "@vercel/next"
-    }
-  ]
-}
+
