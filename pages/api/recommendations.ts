@@ -3,7 +3,7 @@ import { sql } from '@vercel/postgres';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize Gemini AI with error handling
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const genAI = new GoogleGenerativeAI('AIzaSyA1ZZChadARut17eYel7BxfYCkpGU7hv4A');
 
 // Fallback recommendations with 28 diverse meal options
 const fallbackRecommendations = {
