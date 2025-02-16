@@ -271,13 +271,14 @@ const fallbackRecommendations = {
 
 async function generateRecommendations(user: any) {
   if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY is not configured');
+    console.warn('GEMINI_API_KEY is not configured, using fallback recommendations');
+    return fallbackRecommendations;
   }
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
-    const prompt = `Based on the following user profile, suggest 3 meals that would be perfect for their current mood and preferences. Be creative and specific:
+    const prompt = `As an expert culinary AI, create personalized meal recommendations based on this user's profile:
 
     Current Mood: ${user.mood_history.current.current}
     Energy Level: ${user.mood_history.current.energy}/10
@@ -290,42 +291,55 @@ async function generateRecommendations(user: any) {
     - Spice Level: ${user.preferences.spiceLevel}/5
     - Preferred Portion Size: ${user.preferences.mealSize}
 
+    Consider their current mood and energy level to suggest meals that will help maintain or improve their state.
     For each meal, provide:
-    1. An appealing name
-    2. A brief description highlighting why it matches their profile
-    3. Basic nutrition information
+    1. A creative and appealing name
+    2. A detailed description explaining why it matches their profile
+    3. Nutritional information
+    4. A relevant food category for image selection
 
-    Format as JSON with this structure:
+    Return exactly 3 recommendations in this JSON format:
     {
       "recommendations": [
         {
           "title": "Meal Name",
-          "description": "2-3 sentence description",
-          "image": "URL to a relevant Unsplash image about this type of food",
+          "description": "Detailed description",
+          "image": "URL to a relevant Unsplash image",
           "nutritionInfo": "Calories and macros"
         }
       ]
     }`;
 
-    console.log('Sending prompt to Gemini AI:', prompt);
-
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
-    console.log('Received response from Gemini AI:', text);
-
     try {
-      const recommendations = JSON.parse(text);
-      return recommendations;
+      const aiRecommendations = JSON.parse(text);
+
+      // Validate the AI response structure
+      if (!aiRecommendations.recommendations || !Array.isArray(aiRecommendations.recommendations)) {
+        console.warn('Invalid AI response structure, using fallback recommendations');
+        return fallbackRecommendations;
+      }
+
+      // Ensure each recommendation has required fields
+      const validRecommendations = aiRecommendations.recommendations.every(rec => 
+        rec.title && rec.description && rec.nutritionInfo
+      );
+
+      if (!validRecommendations) {
+        console.warn('Invalid recommendation format from AI, using fallback recommendations');
+        return fallbackRecommendations;
+      }
+
+      return aiRecommendations;
     } catch (parseError) {
-      console.error('Failed to parse Gemini AI response:', text);
-      console.log('Using fallback recommendations instead');
+      console.error('Failed to parse Gemini AI response:', parseError);
       return fallbackRecommendations;
     }
   } catch (error) {
     console.error('Error in Gemini AI generation:', error);
-    // Return fallback recommendations if AI fails
     return fallbackRecommendations;
   }
 }
@@ -339,6 +353,7 @@ export default async function handler(
   }
 
   try {
+    // Get the latest user from the database
     const result = await sql`
       SELECT * FROM users 
       ORDER BY id DESC 
@@ -349,19 +364,24 @@ export default async function handler(
       return res.status(404).json({ message: 'No user found' });
     }
 
-    const recommendations = await generateRecommendations(result.rows[0]);
-    console.log('Final recommendations:', recommendations);
+    // Generate recommendations using Gemini AI
+    const aiRecommendations = await generateRecommendations(result.rows[0]);
 
-    // Randomly select 6 recommendations from the available pool
-    const shuffled = recommendations.recommendations.sort(() => 0.5 - Math.random());
+    // Combine AI recommendations with fallback recommendations for variety
+    const allRecommendations = [
+      ...(aiRecommendations.recommendations || []),
+      ...fallbackRecommendations.recommendations
+    ];
+
+    // Randomly select a subset of recommendations
+    const shuffled = allRecommendations.sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 6);
 
     res.status(200).json(selected);
   } catch (error) {
     console.error('Error in recommendations handler:', error);
-    res.status(500).json({ 
-      message: 'Failed to generate recommendations',
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
+    // Return fallback recommendations on error
+    const selected = fallbackRecommendations.recommendations.slice(0, 6);
+    res.status(200).json(selected);
   }
 }

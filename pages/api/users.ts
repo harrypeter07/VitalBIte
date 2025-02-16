@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { sql } from '@vercel/postgres';
-import { insertUserSchema } from '@/lib/schema';
+import { insertUserSchema } from '@shared/schema';
+import { type InsertUser } from '@shared/schema';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +13,7 @@ export default async function handler(
 
   try {
     const userData = insertUserSchema.parse(req.body);
-    
+
     const result = await sql`
       INSERT INTO users (preferences, health_profile, mood_history)
       VALUES (${JSON.stringify(userData.preferences)}, ${JSON.stringify(userData.healthProfile)}, ${JSON.stringify(userData.moodHistory)})
