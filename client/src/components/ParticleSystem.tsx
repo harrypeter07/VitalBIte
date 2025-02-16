@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
@@ -11,7 +13,7 @@ interface Particle {
 
 export default function ParticleSystem() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -36,10 +38,16 @@ export default function ParticleSystem() {
       });
     }
 
+    let animationFrameId: number;
+
     function animate() {
+      if (!canvas || !ctx) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach(particle => {
+        if (!ctx) return;
+
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
@@ -53,18 +61,23 @@ export default function ParticleSystem() {
         }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     }
 
     animate();
 
     const handleResize = () => {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (

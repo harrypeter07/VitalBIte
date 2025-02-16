@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -10,7 +12,7 @@ export default function ThreeBackground() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true });
-    
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -43,15 +45,17 @@ export default function ThreeBackground() {
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1);
     scene.add(light);
-    
+
     const ambientLight = new THREE.AmbientLight(0x4ECDC4, 0.5);
     scene.add(ambientLight);
 
     camera.position.z = 15;
 
+    let animationFrameId: number;
+
     // Animation loop
     function animate() {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
       shapes.forEach((shape, i) => {
         shape.rotation.x += 0.001 * (i % 2 ? 1 : -1);
@@ -79,6 +83,7 @@ export default function ThreeBackground() {
         containerRef.current.removeChild(renderer.domElement);
       }
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
