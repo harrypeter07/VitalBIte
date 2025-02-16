@@ -3,7 +3,6 @@
   "buildCommand": "next build",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["all"],
   "env": {
     "GEMINI_API_KEY": "@gemini_api_key",
     "POSTGRES_URL": "@postgres_url"
