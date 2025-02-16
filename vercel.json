@@ -5,6 +5,13 @@
   "framework": "nextjs",
   "regions": ["all"],
   "env": {
-    "GEMINI_API_KEY": "@gemini_api_key"
-  }
+    "GEMINI_API_KEY": "@gemini_api_key",
+    "POSTGRES_URL": "@postgres_url"
+  },
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ]
 }

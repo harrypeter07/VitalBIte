@@ -197,7 +197,7 @@ const fallbackRecommendations = {
     {
       title: "Turkish Lentil Soup",
       description: "Warming red lentil soup with mint and lemon. High in protein and perfect for cooler days.",
-      image: "https://images.unsplash.com/photo-1547308283-f87a3d6377b4",
+      image: "https://images.unsplash.com/photo-1547592166-23ac45744acd",
       nutritionInfo: "280 cal | 16g protein | 4g fat"
     },
     {
@@ -227,7 +227,7 @@ const fallbackRecommendations = {
     {
       title: "Russian Borscht",
       description: "Hearty beet soup with vegetables and fresh dill. Warming and nutrient-rich comfort food.",
-      image: "https://images.unsplash.com/photo-1547592166-23ac45744acd",
+      image: "https://images.unsplash.com/photo-1547308283-f87a3d6377b4",
       nutritionInfo: "320 cal | 12g protein | 8g fat"
     },
     {
@@ -324,7 +324,11 @@ async function generateRecommendations(user: any) {
       }
 
       // Ensure each recommendation has required fields
-      const validRecommendations = aiRecommendations.recommendations.every(rec => 
+      const validRecommendations = aiRecommendations.recommendations.every((rec: { 
+        title: string; 
+        description: string; 
+        nutritionInfo: string;
+      }) => 
         rec.title && rec.description && rec.nutritionInfo
       );
 

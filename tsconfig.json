@@ -16,10 +16,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
+      "@/*": ["client/src/*"],
+      "@/components/*": ["client/src/components/*"],
+      "@/lib/*": ["client/src/lib/*"],
+      "@/styles/*": ["client/src/styles/*"],
       "@shared/*": ["shared/*"]
     }
   },
