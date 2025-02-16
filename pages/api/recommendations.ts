@@ -175,6 +175,96 @@ const fallbackRecommendations = {
       description: "Graved salmon with dill, potatoes, and pickled vegetables. Rich in omega-3s and protein.",
       image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288",
       nutritionInfo: "480 cal | 34g protein | 16g fat"
+    },
+    {
+      title: "Sichuan Mapo Tofu",
+      description: "Silky tofu in spicy Sichuan pepper sauce with minced pork. Adjustable spice level for heat preferences.",
+      image: "https://images.unsplash.com/photo-1582252852935-c5843e0d6c8c",
+      nutritionInfo: "420 cal | 22g protein | 16g fat"
+    },
+    {
+      title: "Brazilian Açaí Bowl",
+      description: "Frozen açaí blend topped with granola, banana, and honey. Perfect for energy and antioxidants.",
+      image: "https://images.unsplash.com/photo-1590301157890-4810ed352733",
+      nutritionInfo: "340 cal | 8g protein | 14g fat"
+    },
+    {
+      title: "Spanish Seafood Paella",
+      description: "Saffron rice with mixed seafood, vegetables, and lemon. Rich in protein and Mediterranean flavors.",
+      image: "https://images.unsplash.com/photo-1534080564583-6be75777b70a",
+      nutritionInfo: "560 cal | 32g protein | 18g fat"
+    },
+    {
+      title: "Turkish Lentil Soup",
+      description: "Warming red lentil soup with mint and lemon. High in protein and perfect for cooler days.",
+      image: "https://images.unsplash.com/photo-1547308283-f87a3d6377b4",
+      nutritionInfo: "280 cal | 16g protein | 4g fat"
+    },
+    {
+      title: "Hawaiian Poke Stack",
+      description: "Fresh ahi tuna, mango, and avocado stack with sushi rice. Light and protein-rich with tropical flavors.",
+      image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351",
+      nutritionInfo: "420 cal | 28g protein | 12g fat"
+    },
+    {
+      title: "Ethiopian Veggie Platter",
+      description: "Colorful selection of spiced lentils, vegetables, and injera bread. Rich in plant-based protein.",
+      image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2",
+      nutritionInfo: "480 cal | 18g protein | 10g fat"
+    },
+    {
+      title: "Middle Eastern Shakshuka",
+      description: "Eggs poached in spiced tomato sauce with fresh herbs. Perfect for any time of day.",
+      image: "https://images.unsplash.com/photo-1590412200988-a436970781fa",
+      nutritionInfo: "340 cal | 22g protein | 16g fat"
+    },
+    {
+      title: "Caribbean Jerk Bowl",
+      description: "Spiced jerk chicken with coconut rice and plantains. Bold flavors with balanced nutrition.",
+      image: "https://images.unsplash.com/photo-1512058564366-18510be2db19",
+      nutritionInfo: "580 cal | 35g protein | 20g fat"
+    },
+    {
+      title: "Russian Borscht",
+      description: "Hearty beet soup with vegetables and fresh dill. Warming and nutrient-rich comfort food.",
+      image: "https://images.unsplash.com/photo-1547592166-23ac45744acd",
+      nutritionInfo: "320 cal | 12g protein | 8g fat"
+    },
+    {
+      title: "Indonesian Gado-Gado",
+      description: "Mixed vegetables and tofu with peanut sauce. Plant-based protein with complex flavors.",
+      image: "https://images.unsplash.com/photo-1512058564366-18510be2db19",
+      nutritionInfo: "440 cal | 18g protein | 22g fat"
+    },
+    {
+      title: "French Ratatouille",
+      description: "Provençal stewed vegetables with herbs and olive oil. Light and packed with Mediterranean vegetables.",
+      image: "https://images.unsplash.com/photo-1572453800999-e8d2d0d05957",
+      nutritionInfo: "280 cal | 6g protein | 12g fat"
+    },
+    {
+      title: "Lebanese Fattoush Salad",
+      description: "Crispy pita, fresh vegetables, and sumac dressing. Light and refreshing with Middle Eastern flavors.",
+      image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+      nutritionInfo: "320 cal | 8g protein | 14g fat"
+    },
+    {
+      title: "Swiss Alpine Rösti",
+      description: "Crispy potato cake with mushrooms and raclette cheese. Hearty comfort food with vegetables.",
+      image: "https://images.unsplash.com/photo-1558401391-7899b4bd5bbf",
+      nutritionInfo: "520 cal | 16g protein | 28g fat"
+    },
+    {
+      title: "Korean Army Stew",
+      description: "Spicy fusion stew with kimchi, spam, and ramen noodles. Warming and satisfying comfort food.",
+      image: "https://images.unsplash.com/photo-1550367363-9553f6275772",
+      nutritionInfo: "560 cal | 24g protein | 22g fat"
+    },
+    {
+      title: "Argentinian Chimichurri Steak",
+      description: "Grilled steak with herb sauce and roasted vegetables. High protein with bold flavors.",
+      image: "https://images.unsplash.com/photo-1544025162-d76694265947",
+      nutritionInfo: "620 cal | 42g protein | 26g fat"
     }
   ]
 };
